@@ -1,0 +1,45 @@
+CREATE TABLE chargepoint (
+ 	Date DATE   NOT NULL PRIMARY KEY,
+   	open NUMERIC(15,2)  NOT NULL,
+	High  NUMERIC(15,2)   NOT NULL,	
+	Low	NUMERIC(15,2)   NOT NULL,
+	Close	NUMERIC(15,2)   NOT NULL,
+	Adj_Close	NUMERIC(15,2)   NOT NULL,
+	Volume NUMERIC(15,0) NOT NULL
+);
+
+
+CREATE TABLE blink (
+	Date DATE   NOT NULL PRIMARY KEY,
+   	open NUMERIC(15,2)  NOT NULL,
+	High  NUMERIC(15,2)   NOT NULL,	
+	Low	NUMERIC(15,2)   NOT NULL,
+	Close	NUMERIC(15,2)   NOT NULL,
+	Adj_Close	NUMERIC(15,2)   NOT NULL,
+	Volume NUMERIC(15,0) NOT NULL,
+	FOREIGN KEY (DATE) REFERENCES chargepoint (DATE)
+);
+
+
+CREATE TABLE evgo (
+ 	Date DATE   NOT NULL PRIMARY KEY,
+   	open NUMERIC(15,2)  NOT NULL,
+	High  NUMERIC(15,2)   NOT NULL,	
+	Low	NUMERIC(15,2)   NOT NULL,
+	Close	NUMERIC(15,2)   NOT NULL,
+	Adj_Close	NUMERIC(15,2)   NOT NULL,
+	Volume NUMERIC(15,0) NOT NULL,
+	FOREIGN KEY (DATE) REFERENCES chargepoint (DATE),
+	FOREIGN KEY (DATE) REFERENCES blink (DATE)
+);
+
+select * from chargepoint;
+select * from blink;
+select * from evgo;
+
+
+
+
+
+
+
