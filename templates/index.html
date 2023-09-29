@@ -2,8 +2,9 @@
 <html lang="en-us">
   <head>
     <meta charset="UTF-8">
-    <title></title>
-
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Charging Station Stock Comparison Dashboard</title>
 
     <!-- D3 library -->
     <script src="https://d3js.org/d3.v7.min.js"></script>
@@ -13,8 +14,63 @@
 
   </head>
   <body>
+
+    <!--Contains the entire webpage layout-->
+    <div class="container">
+      <!--Row that contains the header-->
+      <div class="row">
+        <div class="col-md-12 jumbotron text-center">
+          <h1>Charging Station Stock Comparison Dashboard</h1>
+          <p>Explore the information between the three different publicly trader charging-station companies.</p>
+        </div>
+      </div>
+
+      <!--Row #1 that includes just the dropdown selection-->
+      <div class="row">
+        <!--Create dropdown-->
+        <div class="col-md-2">
+          <div class="well">
+            <h5>Stock Ticker:</h5>
+            <select id="selDataset" onchange="optionChanged(this.value)"></select>
+          </div>
+        </div>        
+      </div>
+
+      <!--Row #2 that includes Section 1 and Section 2-->
+      <div class="row">
+
+        <!--Create section 1-->
+        <div class="panel panel-primary">
+          <div class="panel-heading">
+            <h3 class="panel-title">Stock Information</h3>
+          </div>
+          <div id="section1" class="panel-body"></div>
+        </div>
+
+        <!--Create section 2-->
+        <div class="col-md-10">
+          <div id="section2"></div>
+        </div>
+      </div>
+
+      <!--Row #3 that includes Section 3 and Section 4-->
+      <div class="row">
+
+        <!--Create section 4-->
+        <div class="col-md-5">
+          <div id="section4"></div>
+        </div>
+
+        <!--Create section 3-->
+        <div class="col-md-10">
+          <div id="section3"></div>
+        </div>
+      </div>
+
+    </div>
+
     <!-- Our JavaScript -->
-    
+    <script src="./static/js/app.js"></script>
 
   </body>
 </html>
