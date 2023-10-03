@@ -2,7 +2,7 @@
 import flask
 
 #Create the app
-app = flask.flask(__name__)
+app = flask.Flask(__name__)
 
 #Import all the necessary data
 from fetch_data import blnk_data_dict

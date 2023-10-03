@@ -1,17 +1,25 @@
 // 
+
+            
+            
 d3.selectAll("#selDataset").on("change", stockChart);
 
 function stockChart() {
     let dropdownMenu = d3.select("#selDataset");
     let dataset = dropdownMenu.property("value");
+    let stock_open = [];
+    let stock_dates = [];
 
     d3.json(dataset)
         .then(function(data) {
             console.log(data);
 
-            let stock_open = [];
-            let stock_dates = [];
+           data.forEach(function(item) {
+                stock_open.push(item.open); 
+                stock_dates.push(item.date); 
+            });
 
+    
             
             const labels = stock_dates; 
             const blink_data = stock_open; 
@@ -32,10 +40,24 @@ function stockChart() {
                     
                 }
             };
-
+            function addData(chart, label, data) {
+                chart.data.labels.push(label);
+                chart.data.datasets.forEach((dataset) => {
+                    dataset.data.push(data);
+                });
+                chart.update();
+            }
             
-            var ctx = document.getElementById('myChart').getContext('2d');
-            var myChart = new Chart(ctx, config);
+            function removeData(chart) {
+                chart.data.labels.pop();
+                chart.data.datasets.forEach((dataset) => {
+                    dataset.data.pop();
+                });
+                chart.update();
+            }
+            
+            let ctx = document.getElementById('myChart').getContext('2d');
+          let myChart = new Chart(ctx, config);
         })
         .catch(function(error) {
             console.error('Error fetching data:', error);
