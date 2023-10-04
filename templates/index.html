@@ -7,23 +7,15 @@
     <title>Charging Station Stock Comparison Dashboard</title>
 
     <!-- D3 library -->
-   <script src="https://d3js.org/d3.v7.min.js"></script>
-
+    <script src="https://d3js.org/d3.v7.min.js"></script>
     <!--Chart.js library-->
-
-    <<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.0/Chart.min.js"></script>
-
-    <link rel="stylesheet" type="text/css" href="../static/css/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <!-- Our CSS -->
-   
     <link rel="stylesheet" type="text/css" href="../static/css/style.css">
-  
-     <!-- Our JavaScript-->
- <script src="./static/js/logic.js"></script>
     
   </head>
   <body>
-
+    
     <!--Contains the entire webpage layout-->
     <div class="container">
       <!--Row that contains the header-->
@@ -33,37 +25,31 @@
           <p>Explore the information between the three different publicly traded charging-station companies.</p>
         </div>
       </div>
-     
-
+      
+      
       <!--Row #1 that includes just the dropdown selection-->
       <div class="row">
         <!--Create dropdown-->
         <div class="col-md-2">
           <div class="well">
             <h5>Stock Ticker:</h5>
-
-              <select id="selDataset" name="">
+            
+            <select id="selDataset" name="">
               <option> --Choose Stock-- </option> 
-              <option value="http://127.0.0.1:5000/blink_data">Blnk</option>
+              <option value="http://127.0.0.1:5000/blnk_data">Blnk</option>
               <option value="http://127.0.0.1:5000/chpt_data">Chpt</option>
               <option value="http://127.0.0.1:5000/evgo_data">Evgo</option>
-            
-
+              
+              
             </select>
           </div>
         </div>        
       </div>
       <canvas id="myChart" width="400" height="200"></canvas>
       
-
-
-
-
-
-
       <!--Row #2 that includes Section 1 and Section 2-->
       <div class="row">
-
+        
         <!--Create section 1-->
         <div class="panel panel-primary">
           <div class="panel-heading">
@@ -71,36 +57,33 @@
           </div>
           <div id="section1" class="panel-body"></div>
         </div>
-
+        
         <!--Create section 2-->
         <div class="col-md-10">
           <div id="section2"></div>
         </div>
       </div>
-
+      
       <!--Row #3 that includes Section 3 and Section 4-->
       <div class="row">
-
+        
         <!--Create section 4-->
         <div class="col-md-5">
           <div id="section4"></div>
         </div>
-
+        
         <!--Create section 3-->
         <div class="col-md-10">
           <div id="section3"></div>
         </div>
       </div>
-
+      
     </div>
-
-    <!-- Our JavaScript -->
-    <script src="./static/js/logic.js"></script>
-
     <div id="chart"></div>
-    <script src="Chart.js"></script>
   </div>
- 
+  
+  <!-- Our JavaScript-->
+  <script src="../static/js/logic.js"></script>
 
   </body>
    

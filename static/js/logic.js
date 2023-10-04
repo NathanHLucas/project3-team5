@@ -1,44 +1,27 @@
-// 
-d3.selectAll("#selDataset").on("change", stockChart);
+// Attach the event listener to the dropdown
+d3.selectAll("#selDataset").on("change", stockData);
 
-function stockChart() {
-    let dropdownMenu = d3.select("#selDataset");
-    let dataset = dropdownMenu.property("value");
+// Define your arrays inside the displayData function
+function stockData(){
+let dropdownMenu = d3.select("#selDataset");
+let dataset = dropdownMenu.property("value");
 
-    d3.json(dataset)
-        .then(function(data) {
-            console.log(data);
+let stock_open = [];
+let stock_dates = [];
 
-            let stock_open = [];
-            let stock_dates = [];
+console.log(dataset);
 
-            
-            const labels = stock_dates; 
-            const blink_data = stock_open; 
+d3.json(dataset)
+  .then(function(data){
+    console.log(data);
 
-            const config = {
-                type: 'line',
-                data: {
-                    labels: labels,
-                    datasets: [{
-                        label: 'blink Chart',
-                        data: blink_data,
-                        fill: false,
-                        borderColor: 'rgb(75, 192, 192)',
-                        tension: 0.1
-                    }]
-                },
-                options: {
-                    
-                }
-            };
+    for (i = 0; i < data.length; i++){
+      stock_open.push(data[i].Open)
+      stock_dates.push(data[i].Date)
+    }
 
-            
-            var ctx = document.getElementById('myChart').getContext('2d');
-            var myChart = new Chart(ctx, config);
-        })
-        .catch(function(error) {
-            console.error('Error fetching data:', error);
-           
-        });
+  // Now you can log or do something with the data inside this callback
+  console.log(stock_dates);
+  console.log(stock_open);
+});
 }
