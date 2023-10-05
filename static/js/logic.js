@@ -11,7 +11,7 @@ let selectedOptionText = selectedOption.text();
 let stock_open = [];
 let stock_dates = [];
 let stock_close = [];
-let stock_vol = []
+let stock_vol = [];
 let keys = [
   "Company",
   "AVG Open",
@@ -55,47 +55,11 @@ d3.json(dataset)
       demoChart.append("h6").text(`${keys[i]}: ${vals[i]}`);
   }
   updateChart(stockData);
-<<<<<<< HEAD
-  updateHistogram(stockData); 
-=======
+  updateHistogram(stockData);
 
 
->>>>>>> origin
 });
 }
-function updateHistogram(data) {
-  let returns = [];
-  for (let i = 1; i < data.length; i++) {
-    let percentReturn = ((data[i].Close - data[i - 1].Close) / data[i - 1].Close) * 100;
-    returns.push(percentReturn);
-  }
-
-  let trace = {
-    x: returns,
-    type: 'histogram',
-    xbins: {
-      start: -10, 
-      end: 10,   
-      size: 0.5   
-    }
-  };
-
-  let plotData = [trace];
-
-  let layout = {
-    title: "Daily Price Returns",
-  dragmode: 'zoom',
-  showlegend: false,
-  xaxis: {
-    rangeslider: {
-      visible: false
-    }
-  }
-  };
-
-  Plotly.newPlot('section4', plotData, layout);
-}
-
 
 function updateChart(data) {
 let dates = data.map(function (item) {
@@ -108,7 +72,7 @@ open: data.map(item => item.Open),
 high: data.map(item => item.High),
 low: data.map(item => item.Low),
 close: data.map(item => item.Close),
-increasing: { line: { color: 'green' } },
+increasing: { line: { color: 'black' } },
 decreasing: { line: { color: 'red' } },
 type: 'candlestick',
 xaxis: 'x',
@@ -118,7 +82,6 @@ yaxis: 'y'
 let plot_data = [trace];
 
 let layout = {
-  title: "Daily Closing/Opening Price",
 dragmode: 'zoom',
 showlegend: false,
 xaxis: {
@@ -130,4 +93,32 @@ xaxis: {
 
 Plotly.newPlot('section3', plot_data, layout);
 }
-      
+
+function updateHistogram(data) {
+  let returns = [];
+  for (let i = 1; i < data.length; i++) {
+   let percentReturn = ((data[i].Close - data[i - 1].Close) / data[i - 1].Close) * 100;
+   returns.push(percentReturn);
+  }
+  let trace = {
+   x: returns,
+   type: 'histogram',
+   xbins: {
+    start: -10,
+    end: 10,
+    size: 0.5
+   }
+  };
+  let plotData = [trace];
+  let layout = {
+   title: "Daily Price Returns",
+  dragmode: 'zoom',
+  showlegend: false,
+  xaxis: {
+   rangeslider: {
+    visible: false
+   }
+  }
+  };
+  Plotly.newPlot('section4', plotData, layout);
+ }
