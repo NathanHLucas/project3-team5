@@ -46,6 +46,7 @@ function stockData(){
         High: parseFloat(item.High),
         Low: parseFloat(item.Low),
         Close: parseFloat(item.Close),
+        Volume: parseFloat(item.Volume)
       };
   });
   let demoChart = d3.select(".panel-body");
@@ -56,8 +57,11 @@ function stockData(){
       //Will add the keys and values as labels in text form into the demo info container
       demoChart.append("h6").text(`${keys[i]}: ${vals[i]}`);
   }
+
+  //create the charts on dashboard by calling functions
   updateChart(stockData);
   updateHistogram(stockData);
+  updateVolume(stockData)
 
 
 });
@@ -85,6 +89,7 @@ let plot_data = [trace];
 //Plot layout
 let layout = {
 dragmode: 'zoom',
+title: 'Candlestick Chart of Price History',
 showlegend: false,
 xaxis: {
   rangeslider: {
@@ -114,7 +119,7 @@ function updateHistogram(data) {
   let plotData = [trace];
   //Layout for the chart
   let layout = {
-   title: "Daily Price Returns",
+   title: "Daily Price Returns Histogram",
   dragmode: 'zoom',
   showlegend: false,
   xaxis: {
@@ -126,3 +131,35 @@ function updateHistogram(data) {
   //Plot the chart
   Plotly.newPlot('section4', plotData, layout);
  }
+
+// create volume bar chart function
+ function updateVolume(data) {
+  let dates = data.map(function (item) {
+  return item.dates;
+  });
+  
+  let volumes = data.map(item => item.Volume)
+  // chart for volume over time
+  let trace = {
+    x: dates,
+    y: volumes,
+    type: 'bar',
+  };
+    
+  let plot_data = [trace];
+    
+  let layout = {
+  dragmode: 'zoom',
+  title: "Volume Over Time",
+  showlegend: false,
+  xaxis: {
+    rangeslider: {
+      visible: false
+      }
+  }
+  };
+  
+  Plotly.newPlot('section2', plot_data, layout);
+  
+  
+  };
