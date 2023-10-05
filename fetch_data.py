@@ -2,9 +2,9 @@
 from sqlalchemy import create_engine, text
 
 # SQLite database paths
-blnk_path = 'BLNK.db'
-chpt_path = 'CHPT.db'
-evgo_path = 'EVGO.db'
+blnk_path = 'Resources/BLNK.db'
+chpt_path = 'Resources/CHPT.db'
+evgo_path = 'Resources/EVGO.db'
 
 # Create a SQLAlchemy engine.
 engine = create_engine(f'sqlite:///{blnk_path}')
