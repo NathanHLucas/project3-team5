@@ -5,25 +5,39 @@ d3.selectAll("#selDataset").on("change", stockData);
 function stockData(){
 let dropdownMenu = d3.select("#selDataset");
 let dataset = dropdownMenu.property("value");
+let selectedOption = dropdownMenu.select("option:checked");
+let selectedOptionText = selectedOption.text();
 
 let stock_open = [];
 let stock_dates = [];
-
-console.log(dataset);
+let stock_close = [];
+let stock_vol = []
+let keys = [
+  "Company",
+  "AVG Open",
+  "Avg Close",
+  "Avg Volume"
+]
 
 d3.json(dataset)
   .then(function(data){
     console.log(data);
 
     for (i = 0; i < data.length; i++){
-      stock_open.push(data[i].Open)
+      stock_open.push(parseFloat(data[i].Open))
       stock_dates.push(data[i].Date)
+      stock_close.push(parseFloat(data[i].Close))
+      stock_vol.push(parseInt(data[i].Volume))
     }
 
-  // Now you can log or do something with the data inside this callback
-  console.log(stock_dates);
-  console.log(stock_open);
-  let stockData = data.map(function (item) {
+    let vals = [
+      selectedOptionText,
+      _.mean(stock_open).toFixed(2),
+      _.mean(stock_close).toFixed(2),
+      _.mean(stock_vol).toFixed(2)
+    ]
+
+    let stockData = data.map(function (item) {
     return {
       dates: item.Date,
       Open: parseFloat(item.Open),
@@ -32,9 +46,21 @@ d3.json(dataset)
       Close: parseFloat(item.Close),
     };
   });
-
+  let demoChart = d3.select(".panel-body");
+  //Will clear all data in the field before appending new data
+  demoChart.html("");
+        
+    for(i=0; i < keys.length; i++){
+      //Will add the keys and values as labels in text form into the demo info container
+      demoChart.append("h6").text(`${keys[i]}: ${vals[i]}`);
+  }
   updateChart(stockData);
+<<<<<<< HEAD
   updateHistogram(stockData); 
+=======
+
+
+>>>>>>> origin
 });
 }
 function updateHistogram(data) {
